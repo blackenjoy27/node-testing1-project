@@ -41,6 +41,7 @@ describe('[Exercise 5] Seasons', () => {
   test.todo('[12] the FOURTH call of seasons.next returns "spring"')
   test.todo('[13] the FIFTH call of seasons.next returns again "summer"')
   test.todo('[14] the 40th call of seasons.next returns "spring"')
+  
 })
 
 describe('[Exercise 6] Car', () => {
