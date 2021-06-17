@@ -84,6 +84,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ["spring","summer","fall","winter"];
+    this.currentIndex = 0;
   }
 
   /**
@@ -99,7 +101,11 @@ class Seasons {
    * seasons.next() // returns "summer"
    */
   next() {
-    // ✨ implement
+    this.currentIndex +=1;
+    if(this.currentIndex === 4){
+      this.currentIndex = 0;
+    }
+    return this.seasons[this.currentIndex];
   }
 }
 
@@ -111,9 +117,11 @@ class Car {
    * @param {number} mpg - miles the car can drive per gallon of gas
    */
   constructor(name, tankSize, mpg) {
-    this.odometer = 0 // car initilizes with zero miles
-    this.tank = tankSize // car initiazes full of gas
-    // ✨ initialize whatever other properties are needed
+    this.odometer = 0 ;// car initilizes with zero miles
+    this.tank = tankSize ;// car initiazes full of gas
+    this.name = name;
+    this.mpg = mpg;
+    this.MAX_FUEL = tankSize;
   }
 
   /**
@@ -130,7 +138,16 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    // ✨ implement
+    let ableToRun = this.tank * this.mpg;
+    if(ableToRun>=distance){
+      let usedFuel = distance/this.mpg;
+      this.tank -= usedFuel;
+      this.odometer += distance;
+    }else{
+      this.tank = 0;
+      this.odometer += ableToRun;
+    }
+    return this.odometer;
   }
 
   /**
@@ -146,6 +163,12 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    this.tank += gallons;
+    if(this.tank>this.MAX_FUEL){
+      this.tank = this.MAX_FUEL;
+      return this.MAX_FUEL * this.mpg;
+    }
+    return this.tank * this.mpg;
   }
 }
 
@@ -168,8 +191,11 @@ class Car {
  *    // error.message is "number must be a number"
  * })
  */
-function isEvenNumberAsync(number) {
-  // ✨ implement
+async function isEvenNumberAsync(number) {
+  if(typeof number !== "number"){
+    return new Error("number must be a number");
+  }
+  return number%2===0?true:false;
 }
 
 module.exports = {
